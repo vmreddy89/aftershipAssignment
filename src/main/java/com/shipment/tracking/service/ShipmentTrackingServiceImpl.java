@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shipment.tracking.model.request.CreateTracking;
+import com.shipment.tracking.model.response.ShipmentTrackingCustomResponse;
 import com.shipment.tracking.model.response.ShipmentTrackingResponse;
+import com.shipment.tracking.model.response.Tracking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -54,7 +56,7 @@ public class ShipmentTrackingServiceImpl implements ShipmentTrackingService {
      * @return
      */
     @Override
-    public ShipmentTrackingResponse getTrackingInfoByTrackingNumber(String slug, String trackingNumber) {
+    public ShipmentTrackingCustomResponse getTrackingInfoByTrackingNumber(String slug, String trackingNumber) {
 
         ResponseEntity<Object> response;
         HttpHeaders httpHeaders = getHttpHeaders();
@@ -67,10 +69,14 @@ public class ShipmentTrackingServiceImpl implements ShipmentTrackingService {
                 .append("/")
                 .append(trackingNumber);
         try {
-            return restTemplate.exchange(
+            ShipmentTrackingResponse shipmentTrackingResponse = restTemplate.exchange(
                     shipmentTrackingUrl.toString(), HttpMethod.GET, httpEntity, ShipmentTrackingResponse.class).getBody();
+            return getShipmentTrackingCustomResponse(shipmentTrackingResponse.getData().getTracking());
+
         } catch (HttpStatusCodeException httpStatusCodeException) {
             throw httpStatusCodeException;
+        }catch (Exception ex){
+            throw new RuntimeException(ex);
         }
     }
 
@@ -79,5 +85,16 @@ public class ShipmentTrackingServiceImpl implements ShipmentTrackingService {
         httpHeaders.set("aftership-api-key", aftershipApiKey);
         httpHeaders.set("Content-Type", "application/json");
         return httpHeaders;
+    }
+
+    private ShipmentTrackingCustomResponse getShipmentTrackingCustomResponse(Tracking tracking){
+        ShipmentTrackingCustomResponse shipmentTrackingCustomResponse = new ShipmentTrackingCustomResponse();
+        shipmentTrackingCustomResponse.setId(tracking.getId());
+        shipmentTrackingCustomResponse.setOrigin(tracking.getPickup_location());
+        shipmentTrackingCustomResponse.setDestination((String)tracking.getCourier_destination_country_iso3());
+        shipmentTrackingCustomResponse.setTrackingNumber(tracking.getTracking_number());
+        shipmentTrackingCustomResponse.setCourierCode(tracking.getSlug());
+        shipmentTrackingCustomResponse.setCurrentStatus(tracking.getTag());
+        return shipmentTrackingCustomResponse;
     }
 }

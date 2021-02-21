@@ -3,6 +3,7 @@ package com.shipment.tracking.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shipment.tracking.model.request.CreateTracking;
 import com.shipment.tracking.model.request.Tracking;
+import com.shipment.tracking.model.response.ShipmentTrackingCustomResponse;
 import com.shipment.tracking.model.response.ShipmentTrackingResponse;
 import com.shipment.tracking.service.ShipmentTrackingServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -66,7 +67,7 @@ public class ShipmentTrackingControllerTests {
 
     @Test
     public void getTrackingInfoTest() throws Exception {
-        ShipmentTrackingResponse shipmentTrackingResponse = new ShipmentTrackingResponse();
+        ShipmentTrackingCustomResponse shipmentTrackingResponse = new ShipmentTrackingCustomResponse();
         String slug = "usps";
         String trackingNumber = "12345";
         org.mockito.Mockito.when(shipmentTrackingService.getTrackingInfoByTrackingNumber(anyString(),anyString())).thenReturn(shipmentTrackingResponse);

@@ -2,6 +2,7 @@ package com.shipment.tracking.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.shipment.tracking.model.request.CreateTracking;
+import com.shipment.tracking.model.response.ShipmentTrackingCustomResponse;
 import com.shipment.tracking.model.response.ShipmentTrackingResponse;
 
 /**
@@ -25,5 +26,5 @@ public interface ShipmentTrackingService {
      * @param trackingNumber
      * @return
      */
-    public ShipmentTrackingResponse getTrackingInfoByTrackingNumber(String slug, String trackingNumber);
+    public ShipmentTrackingCustomResponse getTrackingInfoByTrackingNumber(String slug, String trackingNumber);
 }

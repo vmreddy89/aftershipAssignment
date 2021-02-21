@@ -1,6 +1,7 @@
 package com.shipment.tracking.controller;
 
 import com.shipment.tracking.model.request.CreateTracking;
+import com.shipment.tracking.model.response.ShipmentTrackingCustomResponse;
 import com.shipment.tracking.model.response.ShipmentTrackingResponse;
 import com.shipment.tracking.service.ShipmentTrackingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,10 @@ public class ShipmentTracking {
     }
 
     @GetMapping(value = "/getTrackingInfo/{slug}/{trackingNumber}")
-    public ResponseEntity<ShipmentTrackingResponse> getTrackingInfo(@PathVariable(name = "slug", required = true) String slug,
+    public ResponseEntity<ShipmentTrackingCustomResponse> getTrackingInfo(@PathVariable(name = "slug", required = true) String slug,
                                                                     @PathVariable(name = "trackingNumber", required = true) String trackingNumber) {
-        ShipmentTrackingResponse shipmentTrackingResponse = shipmentTrackingService.getTrackingInfoByTrackingNumber(slug, trackingNumber);
-        return new ResponseEntity<>(shipmentTrackingResponse, HttpStatus.OK);
+        ShipmentTrackingCustomResponse shipmentTrackingcustomResponse = shipmentTrackingService.getTrackingInfoByTrackingNumber(slug, trackingNumber);
+        return new ResponseEntity<>(shipmentTrackingcustomResponse, HttpStatus.OK);
     }
 
 }
