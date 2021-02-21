@@ -22,12 +22,23 @@ public class ShipmentTracking {
     @Autowired
     ShipmentTrackingService shipmentTrackingService;
 
+    /**
+     * This API will be used to Create shipimentTracking with aftership
+     * @param createTracking
+     * @return
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<String> createShipmentTracking(@Valid @RequestBody CreateTracking createTracking) {
         String response = shipmentTrackingService.createShipmentTracking(createTracking);
         return new ResponseEntity<String>(response, HttpStatus.OK);
     }
 
+    /**
+     * This API will be used to Track the shipment info from aftership
+     * @param slug
+     * @param trackingNumber
+     * @return
+     */
     @GetMapping(value = "/getTrackingInfo/{slug}/{trackingNumber}")
     public ResponseEntity<ShipmentTrackingCustomResponse> getTrackingInfo(@PathVariable(name = "slug", required = true) String slug,
                                                                     @PathVariable(name = "trackingNumber", required = true) String trackingNumber) {
