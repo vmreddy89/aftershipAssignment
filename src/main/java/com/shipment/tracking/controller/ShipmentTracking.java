@@ -23,7 +23,7 @@ public class ShipmentTracking {
     ShipmentTrackingService shipmentTrackingService;
 
     /**
-     * This API will be used to Create shipimentTracking with aftership
+     * This API will be used to Create shipimentTracking with aftership and will return the created shipmentTracking response
      * @param createTracking
      * @return
      */
@@ -34,7 +34,7 @@ public class ShipmentTracking {
     }
 
     /**
-     * This API will be used to Track the shipment info from aftership
+     * This API will be used to Track the shipment info from aftership by slug and trackingNumber
      * @param slug
      * @param trackingNumber
      * @return
