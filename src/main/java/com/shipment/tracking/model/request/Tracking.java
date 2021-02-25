@@ -1,12 +1,14 @@
 package com.shipment.tracking.model.request;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.shipment.tracking.custom.annotation.ValidCourierCodeCategory;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Tracking implements Serializable {
 
     private static final long SerialVersionUID = 10l;

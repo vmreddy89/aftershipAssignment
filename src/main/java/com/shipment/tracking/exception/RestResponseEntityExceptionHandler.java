@@ -40,7 +40,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
             bodyOfResponse = ((HttpStatusCodeException)ex).getResponseBodyAsString();
         }
         return handleExceptionInternal(ex, bodyOfResponse,
-                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+                new HttpHeaders(), HttpStatus.BAD_GATEWAY, request);
     }
 
     /**

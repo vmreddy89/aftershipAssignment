@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shipment.tracking.model.request.CreateTracking;
 import com.shipment.tracking.model.request.Tracking;
 import com.shipment.tracking.model.response.ShipmentTrackingCustomResponse;
-import com.shipment.tracking.model.response.ShipmentTrackingResponse;
 import com.shipment.tracking.service.ShipmentTrackingServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +15,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import javax.sound.midi.Track;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

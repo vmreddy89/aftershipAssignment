@@ -22,10 +22,6 @@ public class ShipmentTrackingApplication {
 		SpringApplication.run(ShipmentTrackingApplication.class, args);
 	}
 
-	@Bean
-	public Docket swaggerDocumentation() {
-		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.shipment.tracking")).build();
-	}
+
 
 }

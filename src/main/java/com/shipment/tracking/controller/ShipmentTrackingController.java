@@ -2,16 +2,15 @@ package com.shipment.tracking.controller;
 
 import com.shipment.tracking.model.request.CreateTracking;
 import com.shipment.tracking.model.response.ShipmentTrackingCustomResponse;
-import com.shipment.tracking.model.response.ShipmentTrackingResponse;
 import com.shipment.tracking.service.ShipmentTrackingService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -21,8 +20,9 @@ import javax.validation.Valid;
  */
 @RestController
 
-public class ShipmentTracking {
+public class ShipmentTrackingController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ShipmentTrackingController.class);
     @Autowired
     ShipmentTrackingService shipmentTrackingService;
 
@@ -52,12 +52,5 @@ public class ShipmentTracking {
         return new ResponseEntity<>(shipmentTrackingcustomResponse, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/multipleParams")
-    public String testMultipleParams(HttpServletRequest request){
-        String filter1 = request.getParameter("filter1");
-        String filter2 = request.getParameter(("filter2"));
-        String filter3 = request.getParameter("filter3");
-        return filter1+":"+filter2+":"+filter3; // Somasekhar Raju
-    }
 
 }
